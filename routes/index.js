@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const csvtojson = require('./csvtojson')
+const users = require('./users');
+const ubs = require('./ubs')
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-module.exports = router;
+module.exports = {
+  csvtojson,
+  users,
+  ubs
+}
