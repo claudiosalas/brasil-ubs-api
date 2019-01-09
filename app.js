@@ -13,7 +13,6 @@ app.use(cookieParser());
 
 router.use('/csvtojson', routes.csvtojson)
 router.use('/ubs', routes.ubs)
-router.use('/users', routes.users)
 
 // add api to all routes
 app.use('/api', router)
