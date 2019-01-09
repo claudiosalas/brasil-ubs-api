@@ -3,6 +3,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const router = express.Router()
 const app = express();
+const db = require('./repository/ubs')
+db.load()
 
 const routes = require('./routes')
 
