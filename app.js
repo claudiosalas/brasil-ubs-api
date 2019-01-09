@@ -3,6 +3,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const router = express.Router()
 const app = express();
+const db = require('./repository/ubs')
+db.load()
 
 const routes = require('./routes')
 
@@ -13,7 +15,6 @@ app.use(cookieParser());
 
 router.use('/csvtojson', routes.csvtojson)
 router.use('/ubs', routes.ubs)
-router.use('/users', routes.users)
 
 // add api to all routes
 app.use('/api', router)
