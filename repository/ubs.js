@@ -1,7 +1,10 @@
-const quality = require('../resources/ubs.json')
+const Geo = require('geo-nearby');
+const ubs = require('../resources/ubs.json')
 const address = require('../resources/ogc.json')
-let data = []
+let ubsData = []
+let geoData = []
 let addresses = {}
+let geoContent = null
 
 const getCEPBasedOnCNES = (cnes) => {
   return (addresses && addresses[cnes]) || '00000000'
@@ -15,22 +18,24 @@ const load = () => {
       addresses[optCNES.co_cnes] = optCEP.co_cep
     }
   });
-  return content()
-}
 
-const content = () => {
-  if (data.length) {
-    return data
-  }
-  quality.forEach(element => {
+  ubs.forEach(element => {
     const cep = getCEPBasedOnCNES(element.cod_cnes)
     element.co_cep = cep
-    data.push(element)
+    ubsData.push(element)
+    geoData.push([Number(element.vlr_latitude), Number(element.vlr_longitude), element.cod_cnes])
   });
-  return data
+
+  let geoDataSet = Geo.createCompactSet(geoData);
+  geoContent = new Geo(geoDataSet, { sorted: true });
 }
 
+const content = () => ubsData
+
+const geo = () => geoContent
+
 module.exports = {
+  geo,
   content,
   load
 }
