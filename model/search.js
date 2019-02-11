@@ -9,12 +9,15 @@ const nearBy = (lat, long, radius = 30000) => {
 }
 
 const applyCriteria = (item, criteria) => { 
+  if(criteria == undefined)
+    return true
+
   const parse = (value) => {
     switch(value) {
       case 'very_good':
         return 'muito'
       case 'good':
-        return 'acima'
+        return 'ho acima'
       case 'fair_and_poor':
         return 'mediano'
       default:
