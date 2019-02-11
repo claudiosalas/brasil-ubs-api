@@ -1,14 +1,16 @@
 const content = require('../repository/ubs').content()
 const search = require('./search')
 
-const byCity = (city) => {
-  return content.filter((value) => search.city(value, city))
+const byCity = (city, criteria) => {
+  return content.filter((value) => search.city(value, city) && search.applyCriteria(value, criteria))
 }
 
-const byNearBy = (cities) => {
+const byNearBy = (cities, criteria) => {
   const data = []
   cities.forEach(city => {
-    data.push(content.filter(value => value.cod_cnes === city.i))
+    const result = content.filter(value => value.cod_cnes === city.i && search.applyCriteria(value, criteria))
+    if (result.length === 0) return
+    data.push(result)
   })
   return data
 }
