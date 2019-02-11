@@ -1,5 +1,6 @@
 const pagination = require('./pagination')
 const filter = require('./filter')
+const search = require('./search')
 const content = require('../repository/ubs').content()
 
 const list = (req, res) => {
@@ -17,8 +18,9 @@ const listByCity = (req, res) => {
   try {
     const page = parseInt(req.body.page) || 1
     const city = req.body && req.body.city
+    const criteria = req.body.criteria
     if (!isNaN(page) && city) {
-      const filteredContent = filter.byCity(city)
+      const filteredContent = filter.byCity(city, criteria)
       if (filteredContent.length === 0) {
         res.status(500).send({
           message: `City: ${city} not found!`
@@ -34,8 +36,25 @@ const listByCity = (req, res) => {
   }
 }
 
+const listNearBy = (req, res) => {
+  const lat = req.body.lat
+  const long = req.body.long
+  const radius = req.body.radius
+  const criteria = req.body.criteria
+
+  if (!lat || !long) {
+    res.status(500).send({
+      message: 'Missing information, lat or long information!'
+    })
+  }
+
+  const filteredContent = search.nearBy(lat, long, radius)
+  return res.status(200).send(filter.byNearBy(filteredContent, criteria))
+}
+
 module.exports = {
   list,
   listByPage,
-  listByCity
+  listByCity,
+  listNearBy
 }

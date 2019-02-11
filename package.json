@@ -7,11 +7,12 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "convert-csv-to-json": "0.0.13",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
-    "morgan": "~1.9.0",
-    "convert-csv-to-json": "0.0.13"
+    "geo-nearby": "^2.0.1",
+    "morgan": "~1.9.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
