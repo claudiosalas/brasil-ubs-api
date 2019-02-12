@@ -23,8 +23,16 @@ const listByCity = (req, res) => {
       const filteredContent = filter.byCity(city, criteria)
       if (filteredContent.length === 0) {
         res.status(500).send({
-          message: `City: ${city} not found!`
-        })
+          "_metadata": {
+              "page": "0 / 0",
+              "page_count": 0,
+              "start_index": 0,
+              "end_index": 0,
+              "total_count": 0,
+              "current_page": "0",
+              "next_page": "0"
+          },
+          "records": []})
       } else {
         res.send(pagination.parse(page, filteredContent))
       }
