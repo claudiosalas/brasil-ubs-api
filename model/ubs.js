@@ -57,7 +57,9 @@ const listNearBy = (req, res) => {
   }
 
   const filteredContent = search.nearBy(lat, long, radius)
-  return res.status(200).send(filter.byNearBy(filteredContent, criteria))
+  return res.status(200).send({
+    records: filter.byNearBy(filteredContent, criteria)
+  })
 }
 
 module.exports = {
