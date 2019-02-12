@@ -58,7 +58,7 @@ const listNearBy = (req, res) => {
 
   const filteredContent = search.nearBy(lat, long, radius)
   return res.status(200).send({
-    records: filter.byNearBy(filteredContent, criteria)
+    records: filter.byNearBy(filteredContent, criteria).map(item => item[0])
   })
 }
 
