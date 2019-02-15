@@ -10,9 +10,11 @@
     "convert-csv-to-json": "0.0.13",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
-    "express": "~4.16.0",
+    "express": "^4.16.4",
     "geo-nearby": "^2.0.1",
-    "morgan": "~1.9.0"
+    "js-yaml": "^3.12.1",
+    "morgan": "~1.9.0",
+    "swagger-ui-express": "^4.0.2"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
