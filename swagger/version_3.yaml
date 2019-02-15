@@ -1,0 +1,71 @@
+openapi: 3.0.1
+info:
+  title: LDC Hackathon | UBS api
+  description: This is the UBS api to facilitate the data access in all care units in Brazil.
+  version: '1.2'
+servers:
+  - url: 'https://api-ldc-hackathon.herokuapp.com'
+paths:
+  /api/ubs/{page}:
+    get:
+      description: Get UBS list using pagination
+      parameters:
+      - name: page
+        in: path
+        description: Pagination parameter. eg. 1 of x
+        required: true
+        schema:
+          type: integer
+          example: 1, Page   # <----
+        example: 1 # Overrides schema-level example
+      responses:
+        '200':
+          description: 'JSON list of UBS with the pagination information itself'
+      servers:
+        - url: 'https://api-ldc-hackathon.herokuapp.com'
+  /api/ubs/city:
+    post:
+      description: Get UBS list by city
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                city:
+                  type: string
+                page:
+                  type: integer
+            examples:
+              '0':
+                value: "{\"city\": \"Jacareí\", \"page\": 1\"}"
+      responses:
+        '200':
+          description: 'JSON list of UBS with the pagination information itself'
+      servers:
+        - url: 'https://api-ldc-hackathon.herokuapp.com'
+  /api/ubs/nearBy:
+    post:
+      description: Get UBS nearby with a radius of x meters.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                lat:
+                  type: number
+                long:
+                  type: number
+                radius:
+                  type: integer
+            examples:
+              '0':
+                value: "{\"lat\": -23.223701, \"long\": -45.900906, radius: 10000\"}"
+      responses:
+        '200':
+          description: 'JSON list of UBS nearby by latitude and longitude'
+      servers:
+        - url: 'https://api-ldc-hackathon.herokuapp.com'
+    servers:
+      - url: 'https://api-ldc-hackathon.herokuapp.com'
