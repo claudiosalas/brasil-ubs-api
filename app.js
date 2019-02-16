@@ -1,4 +1,5 @@
 const express = require('express');
+var cors = require('cors')
 const swaggerUi = require('swagger-ui-express');
 const swaggerUtil = require('./swagger/swaggerUtil');
 const cookieParser = require('cookie-parser');
@@ -11,10 +12,12 @@ db.load()
 const routes = require('./routes')
 
 app.use(logger('dev'));
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static('public'));
+
 
 router.use('/csvtojson', routes.csvtojson)
 router.use('/ubs', routes.ubs)
