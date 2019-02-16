@@ -23,7 +23,7 @@ router.use('/ubs', routes.ubs)
 // Change the swaggerJsonFromYaml paramater to (1, 2 or 3), this is the api doc version number
 app.use('/api/docs',
     swaggerUi.serve,
-    swaggerUi.setup(swaggerUtil.swaggerJsonFromYaml(3), true, { validatorUrl: null })
+    swaggerUi.setup(swaggerUtil.swaggerJsonFromYaml(1), true, { validatorUrl: null })
 ); 
 
 // add api to all routes
